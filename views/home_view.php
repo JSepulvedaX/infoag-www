@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Infoag</title>
+        <title>InfoAg</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="description" content="Descripcion Proyecto">
 		<meta name="author" content="Jaime Sepúlveda">
