@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>LabMovil</title>
+        <title>Infoag</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="description" content="Descripcion Proyecto">
 		<meta name="author" content="Jaime Sepúlveda">
@@ -23,30 +23,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href="<?php echo base_url(); ?>assets/css/new.css" rel="stylesheet" type="text/css">
 
         <script src="<?php echo base_url(); ?>assets/js/modernizr.min.js"></script>
-		
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->       
-				
+        <![endif]-->
+
     </head>
 
     <body class="fixed-left">
-        
+
         <!-- Begin page -->
         <div id="wrapper">
-        
+
 	    <!-- Top Bar Start -->
 	    		<?php include 'topmenu_code.php'; ?>
 	    <!-- Top Bar End -->
-		
+
             <!-- Left Sidebar Start -->
 			<?php include 'leftmenu_code.php'; ?>
             <!-- Left Sidebar End -->
-			
-            <!-- Content Start -->       
+
+            <!-- Content Start -->
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                     </div> <!-- container -->
-                               
+
 
 
                 </div> <!-- content -->
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- Content End -->
         </div>
         <!-- END wrapper -->
-		
+
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -101,14 +101,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<input type="password" class="form-control" id="pass" name="pass" value="" required="" title="Please enter your username" placeholder="**********">
 								</div>
 							</div><br/>
-							
+
 							<?php if ($error == "error_login"): ?>
 							<div class="alert alert-danger alert-dismissible fade in">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                 <a href="#" class="alert-link">ERROR: </a>El usuario o contraseña están incorrectos.
                             </div>
-							<?php endif; ?>	
-							
+							<?php endif; ?>
+
 							<button type="submit" class="btn btn-success btn-block">Ingresar</button>
 						</form>
 					</div>
@@ -133,11 +133,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.app.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/new.js"></script>
-		
+
 		<?php if ($error == "error_login"): ?>
 		<script>
 			$('#loginModal').modal('show');
 		</script>
-		<?php endif; ?>	
+		<?php endif; ?>
 	</body>
 </html>
