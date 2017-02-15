@@ -34,24 +34,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </head>
 
     <body class="fixed-left">
-
         <!-- Begin page -->
         <div id="wrapper">
 
-	    <!-- Top Bar Start -->
-	    		<?php include 'topmenu_code.php'; ?>
-	    <!-- Top Bar End -->
+	        <!-- Top Bar Start -->
+	    	<?php include 'topmenu_code.php'; ?>
+	        <!-- Top Bar End -->
 
-            <!-- Left Sidebar Start -->
+            <!-- Left Bar Start -->
 			<?php include 'leftmenu_code.php'; ?>
-            <!-- Left Sidebar End -->
+            <!-- Left Bar End -->
 
             <!-- Content Start -->
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
                     <div class="container">
-
                         <!-- Page-Title -->
                         <div class="row">
                             <div class="col-sm-12">
