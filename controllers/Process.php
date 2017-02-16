@@ -11,7 +11,7 @@ class Process extends CI_Controller {
 
 
 	public function index()
-	{		
+	{
 		if($this->session->userdata('logged_in'))
 		{
 			$session_data = $this->session->userdata('logged_in');
@@ -23,11 +23,11 @@ class Process extends CI_Controller {
 			$this->redirect_page("no", "home_view", null, null);
 		}
 	}
-	
+
 	function redirect_page($login, $page, $user, $user_type)
 	{
 		$error_msg = $this->session->flashdata('error');
-		
+
 		$data['page'] = "process";
 		$data['error'] = $error_msg;
 		$data['login'] = $login;
@@ -49,9 +49,21 @@ class Process extends CI_Controller {
 
 		echo "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
 
-		$agrzone = $this->poly->getPoly($lat, $lng, 5);
+		//$agrzone = $this->poly->getPoly($lat, $lng, 5);
+		//$station = $this->poly->getStat($lat, $lng, $agrzone);
 
-		$station = $this->poly->getStat($lat, $lng, $agrzone);
+
+        $sock = socket_create(AF_INET, SOCK_STREAM, 0);
+
+        if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
+        {
+            $errorcode = socket_last_error();
+            $errormsg = socket_strerror($errorcode);
+
+            die("Couldn't create socket: [$errorcode] $errormsg \n");
+        }
+
+        echo "Socket created";
 
 
 		//echo "  -  Poly =  " . $result;
