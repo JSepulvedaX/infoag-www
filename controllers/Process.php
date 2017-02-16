@@ -16,7 +16,7 @@ class Process extends CI_Controller {
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$this->latLng(); //control de errores
-            //$this->redirect_page("yes", "reports_view", $session_data['user'], $session_data['type']);
+            $this->redirect_page("yes", "reports_view", $session_data['user'], $session_data['type']);
 		}
 		else
 		{
@@ -46,9 +46,9 @@ class Process extends CI_Controller {
         $lat = $this->input->post('inputLat');
         $lng = $this->input->post('inputLng');
 
-		echo "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
-		$agrzone = $this->poly->getPoly($lat, $lng, 5);
-		$station = $this->poly->getStat($lat, $lng, $agrzone);
+		//echo "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
+		//$agrzone = $this->poly->getPoly($lat, $lng, 5);
+		//$station = $this->poly->getStat($lat, $lng, $agrzone);
 
         if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
         {
