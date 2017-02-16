@@ -53,7 +53,7 @@ class Process extends CI_Controller {
 		//$station = $this->poly->getStat($lat, $lng, $agrzone);
 
 
-        $sock = socket_create(AF_INET, SOCK_STREAM, 0);
+        $sock;
 
         if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
         {
@@ -63,7 +63,17 @@ class Process extends CI_Controller {
             die("Couldn't create socket: [$errorcode] $errormsg \n");
         }
 
-        echo "Socket created";
+        echo "Socket created \n";
+
+        if(!socket_connect($sock , '127.0.0.1' , 5100))
+        {
+            $errorcode = socket_last_error();
+            $errormsg = socket_strerror($errorcode);
+
+            die("Could not connect: [$errorcode] $errormsg \n");
+        }
+
+        echo "Connection established \n";
 
 
 		//echo "  -  Poly =  " . $result;
