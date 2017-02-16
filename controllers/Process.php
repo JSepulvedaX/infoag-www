@@ -2,12 +2,12 @@
 
 class Process extends CI_Controller {
 
-        function __construct()
-        {
-                parent::__construct();
-                $this->load->model('poly','',TRUE);
-                $this->load->library('form_validation');
-        }
+    function __construct()
+    {
+            parent::__construct();
+            $this->load->model('poly','',TRUE);
+            $this->load->library('form_validation');
+    }
 
 
 	public function index()
@@ -36,15 +36,13 @@ class Process extends CI_Controller {
 		$this->load->view($page, $data);
 	}
 
+    function latLng()
+    {
+        $this->form_validation->set_rules('inputLat', 'inputLat', 'trim|required|xss_clean'); $this->check_form_validation();
+        $this->form_validation->set_rules('inputLng', 'inputLng', 'trim|required|xss_clean'); $this->check_form_validation();
 
-
-        function latLng()
-        {
-                $this->form_validation->set_rules('inputLat', 'inputLat', 'trim|required|xss_clean'); $this->check_form_validation();
-                $this->form_validation->set_rules('inputLng', 'inputLng', 'trim|required|xss_clean'); $this->check_form_validation();
-
-                $lat = $this->input->post('inputLat');
-                $lng = $this->input->post('inputLng');
+        $lat = $this->input->post('inputLat');
+        $lng = $this->input->post('inputLng');
 
 
 		echo "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
@@ -63,7 +61,7 @@ class Process extends CI_Controller {
             die("Couldn't create socket: [$errorcode] $errormsg \n");
         }
 
-        echo "Socket created \n";
+        echo "Socket created<br>";
 
         if(!socket_connect($sock , '127.0.0.1' , 5100))
         {
@@ -73,7 +71,20 @@ class Process extends CI_Controller {
             die("Could not connect: [$errorcode] $errormsg \n");
         }
 
-        echo "Connection established \n";
+        echo "Connection established<br>";
+
+        $message = "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
+
+        //Send the message to the server
+        if(!socket_send( $sock , $message , strlen($message) , 0))
+        {
+            $errorcode = socket_last_error();
+            $errormsg = socket_strerror($errorcode);
+
+            die("Could not send data: [$errorcode] $errormsg \n");
+        }
+
+        echo "Message send successfully<br>";
 
 
 		//echo "  -  Poly =  " . $result;
