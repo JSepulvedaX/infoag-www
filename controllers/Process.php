@@ -15,8 +15,8 @@ class Process extends CI_Controller {
 		if($this->session->userdata('logged_in'))
 		{
 			$session_data = $this->session->userdata('logged_in');
-			//$this->redirect_page("yes", "process_view", $session_data['user'], $session_data['type']);
-			$this->latLng();
+			$this->latLng(); //control de errores
+            $this->redirect_page("yes", "reports_view", $session_data['user'], $session_data['type']);
 		}
 		else
 		{
@@ -38,20 +38,17 @@ class Process extends CI_Controller {
 
     function latLng()
     {
+        $sock;
+
         $this->form_validation->set_rules('inputLat', 'inputLat', 'trim|required|xss_clean'); $this->check_form_validation();
         $this->form_validation->set_rules('inputLng', 'inputLng', 'trim|required|xss_clean'); $this->check_form_validation();
 
         $lat = $this->input->post('inputLat');
         $lng = $this->input->post('inputLng');
 
-
-		echo "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
-
+		//echo "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
 		//$agrzone = $this->poly->getPoly($lat, $lng, 5);
 		//$station = $this->poly->getStat($lat, $lng, $agrzone);
-
-
-        $sock;
 
         if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
         {
@@ -61,8 +58,6 @@ class Process extends CI_Controller {
             die("Couldn't create socket: [$errorcode] $errormsg \n");
         }
 
-        echo "Socket created<br>";
-
         if(!socket_connect($sock , '127.0.0.1' , 5100))
         {
             $errorcode = socket_last_error();
@@ -71,9 +66,7 @@ class Process extends CI_Controller {
             die("Could not connect: [$errorcode] $errormsg \n");
         }
 
-        echo "Connection established<br>";
-
-        $message = "lat = [" . $lat . "], lng = [" . $lng . "]<br>";
+        $message = "[use_id],".$lat.",".$lng.",2015-01-01,2015-12-31";
 
         //Send the message to the server
         if(!socket_send( $sock , $message , strlen($message) , 0))
@@ -84,54 +77,14 @@ class Process extends CI_Controller {
             die("Could not send data: [$errorcode] $errormsg \n");
         }
 
-        echo "Message send successfully<br>";
+    }
 
-
-		//echo "  -  Poly =  " . $result;
-
-                /*if($this->check_database($user, $pass) == FALSE)
-                {
-                        $this->session->set_flashdata('error', 'error_login');
-                        redirect('home', 'refresh');
-                }
-                else
-                {
-                        redirect('panel_adm', 'refresh');
-		}*/
-        }
-
-        function check_form_validation()
+    function check_form_validation()
+    {
+        /*if($this->form_validation->run() == FALSE)
         {
-                /*if($this->form_validation->run() == FALSE)
-                {
-                        $this->session->set_flashdata('error', 'error_login');
-                        redirect('home', 'refresh');
-		}*/
-        }
-
-
-        /*function check_database($user, $pass)
-        {
-                $result = $this->user->login($user, $pass);
-
-                if($result)
-                {
-                        $sess_array = array();
-                        foreach($result as $row)
-                        {
-                                $sess_array = array(
-                                        'user' => $row->use_name,
-                                        'type' => "Admin"
-                                );
-                                $this->session->set_userdata('logged_in', $sess_array);
-                        }
-                        return TRUE;
-                }
-                else
-                {
-                        return FALSE;
-                }
-	}*/
-
-
+            $this->session->set_flashdata('error', 'error_login');
+            redirect('home', 'refresh');
+	    }*/
+    }
 }
