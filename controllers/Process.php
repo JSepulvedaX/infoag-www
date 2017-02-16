@@ -66,7 +66,7 @@ class Process extends CI_Controller {
             die("Could not connect: [$errorcode] $errormsg \n");
         }
 
-        $message = "#user_id,".$lat.",".$lng.",2015-01-01,2015-12-31";
+        $message = "INFMET:#user_id,".$lat.",".$lng.",2015-01-01,2015-12-31";
 
         //Send the message to the server
         if(!socket_send( $sock , $message , strlen($message) , 0))
